@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ئەدمین پانێڵ - کورد ئەپ ستۆر</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="ئەدمین پانێڵی کورد ئەپ ستۆر">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="admin-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="login-container">
+                <div class="login-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>چوونەژوورەوەی ئەدمین</h2>
+                </div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="admin-password">پاسوۆرد:</label>
+                        <input type="password" id="admin-password" required>
+                    </div>
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        چوونەژوورەوە
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="dashboard hidden">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cogs"></i>
+                    <h1>ئەدمین پانێڵ</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" onclick="goToMainSite()">
+                        <i class="fas fa-home"></i>
+                        گەڕانەوە بۆ ماڵپەڕ
+                    </button>
+                    <button class="btn btn-danger" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        دەرچوون
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" class="nav-item active" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        داشبۆرد
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-section="apps">
+                        <i class="fas fa-mobile-alt"></i>
+                        بەڕێوەبردنی ئەپەکان
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-section="upload">
+                        <i class="fas fa-upload"></i>
+                        بەرزکردنەوەی ئەپ
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-section="categories">
+                        <i class="fas fa-tags"></i>
+                        پۆلەکان
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-section="ads">
+                        <i class="fas fa-ad"></i>
+                        ڕیکلامەکان
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-section="settings">
+                        <i class="fas fa-cog"></i>
+                        ڕێکخستنەکان
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <h2>داشبۆردی سەرەکی</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-apps">0</h3>
+                            <p>کۆی ئەپەکان</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-downloads">0</h3>
+                            <p>کۆی داونلۆدەکان</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-categories">0</h3>
+                            <p>کۆی پۆلەکان</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-ad"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-ads">0</h3>
+                            <p>کۆی ڕیکلامەکان</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Apps Management Section -->
+            <section id="apps-section" class="content-section">
+                <div class="section-header">
+                    <h2>بەڕێوەبردنی ئەپەکان</h2>
+                    <button class="btn btn-primary" onclick="showSection('upload')">
+                        <i class="fas fa-plus"></i>
+                        زیادکردنی ئەپی نوێ
+                    </button>
+                </div>
+                <div class="apps-table-container">
+                    <table class="apps-table">
+                        <thead>
+                            <tr>
+                                <th>لۆگۆ</th>
+                                <th>ناو</th>
+                                <th>پۆل</th>
+                                <th>داونلۆد</th>
+                                <th>بەروار</th>
+                                <th>دۆخ</th>
+                                <th>کردارەکان</th>
+                            </tr>
+                        </thead>
+                        <tbody id="apps-table-body">
+                            <!-- Apps will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Upload Section -->
+            <section id="upload-section" class="content-section">
+                <h2>بەرزکردنەوەی ئەپی نوێ</h2>
+                <form id="upload-form" class="upload-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="app-name">ناوی ئەپ:</label>
+                            <input type="text" id="app-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="app-category">پۆل:</label>
+                            <select id="app-category" required>
+                                <option value="">پۆلێک هەڵبژێرە</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="app-description">وەسف:</label>
+                        <textarea id="app-description" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="app-logo">لۆگۆی ئەپ:</label>
+                            <input type="file" id="app-logo" accept="image/*" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="app-apk">فایلی APK:</label>
+                            <input type="file" id="app-apk" accept=".apk" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="app-screenshots">سکرین شۆتەکان:</label>
+                        <input type="file" id="app-screenshots" accept="image/*" multiple required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="app-featured">
+                                ئەپی تایبەت
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="app-pinned">
+                                pin کردن
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-upload"></i>
+                        بەرزکردنەوەی ئەپ
+                    </button>
+                </form>
+            </section>
+
+            <!-- Categories Section -->
+            <section id="categories-section" class="content-section">
+                <div class="section-header">
+                    <h2>بەڕێوەبردنی پۆلەکان</h2>
+                    <button class="btn btn-primary" onclick="showAddCategoryModal()">
+                        <i class="fas fa-plus"></i>
+                        زیادکردنی پۆلی نوێ
+                    </button>
+                </div>
+                <div class="categories-grid" id="categories-grid">
+                    <!-- Categories will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Ads Section -->
+            <section id="ads-section" class="content-section">
+                <div class="section-header">
+                    <h2>بەڕێوەبردنی ڕیکلامەکان</h2>
+                    <button class="btn btn-primary" onclick="showAddAdModal()">
+                        <i class="fas fa-plus"></i>
+                        زیادکردنی ڕیکلامی نوێ
+                    </button>
+                </div>
+                <div class="ads-grid" id="ads-grid">
+                    <!-- Ads will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="content-section">
+                <h2>ڕێکخستنەکان</h2>
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <h3>گشتی</h3>
+                        <div class="form-group">
+                            <label for="site-title">ناوی ماڵپەڕ:</label>
+                            <input type="text" id="site-title" value="کورد ئەپ ستۆر">
+                        </div>
+                        <div class="form-group">
+                            <label for="site-description">وەسفی ماڵپەڕ:</label>
+                            <textarea id="site-description" rows="3">باشترین ئەپەکان بۆ کوردان</textarea>
+                        </div>
+                    </div>
+                    <div class="setting-card">
+                        <h3>ئاسایش</h3>
+                        <div class="form-group">
+                            <label for="change-password">گۆڕینی پاسوۆرد:</label>
+                            <input type="password" id="change-password" placeholder="پاسوۆردی نوێ">
+                        </div>
+                        <button class="btn btn-warning">
+                            <i class="fas fa-key"></i>
+                            گۆڕینی پاسوۆرد
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="category-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>زیادکردنی پۆلی نوێ</h3>
+                <button class="close-btn" onclick="closeCategoryModal()">&times;</button>
+            </div>
+            <form id="category-form">
+                <div class="form-group">
+                    <label for="category-name">ناوی پۆل:</label>
+                    <input type="text" id="category-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="category-icon">ئایکۆن:</label>
+                    <input type="text" id="category-icon" placeholder="fas fa-gamepad">
+                </div>
+                <button type="submit" class="btn btn-primary">زیادکردن</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="ad-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>زیادکردنی ڕیکلامی نوێ</h3>
+                <button class="close-btn" onclick="closeAdModal()">&times;</button>
+            </div>
+            <form id="ad-form">
+                <div class="form-group">
+                    <label for="ad-title">ناونیشانی ڕیکلام:</label>
+                    <input type="text" id="ad-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="ad-content">ناوەڕۆکی ڕیکلام:</label>
+                    <textarea id="ad-content" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ad-image">وێنەی ڕیکلام:</label>
+                    <input type="file" id="ad-image" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="ad-link">بەستەری ڕیکلام:</label>
+                    <input type="url" id="ad-link">
+                </div>
+                <button type="submit" class="btn btn-primary">زیادکردن</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
+

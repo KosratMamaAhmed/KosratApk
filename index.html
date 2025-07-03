@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کورد ئەپ ستۆر - Kurd App Store</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="باشترین ئەپەکان بۆ کوردان">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="کورد ئەپ ستۆر">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16x16.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h1>کورد ئەپ ستۆر</h1>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#" class="nav-link active">سەرەکی</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link">پۆلەکان <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content" id="categories-dropdown">
+                                <!-- Categories will be loaded here -->
+                            </div>
+                        </li>
+                        <li><a href="#" class="nav-link">دەربارە</a></li>
+                        <li><a href="admin.html" class="nav-link admin-link">ئەدمین</a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="گەڕان بۆ ئەپەکان...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Featured Apps Section -->
+            <section class="featured-section">
+                <h2 class="section-title">ئەپە تایبەتەکان</h2>
+                <div class="featured-apps" id="featured-apps">
+                    <!-- Featured apps will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Categories Filter -->
+            <section class="filter-section">
+                <div class="filter-buttons" id="filter-buttons">
+                    <button class="filter-btn active" data-category="all">هەموو</button>
+                    <!-- Category buttons will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Apps Grid -->
+            <section class="apps-section">
+                <div class="apps-grid" id="app-list">
+                    <!-- Apps will be loaded here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Advertisement Section -->
+            <section class="ad-section" id="ad-section">
+                <!-- Ads will be loaded here -->
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>کورد ئەپ ستۆر</h3>
+                    <p>باشترین ئەپەکان بۆ کوردان</p>
+                </div>
+                <div class="footer-section">
+                    <h4>بەستەرەکان</h4>
+                    <ul>
+                        <li><a href="#">سەرەکی</a></li>
+                        <li><a href="#">پۆلەکان</a></li>
+                        <li><a href="#">دەربارە</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>پەیوەندی</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 کورد ئەپ ستۆر. هەموو مافەکان پارێزراون.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
